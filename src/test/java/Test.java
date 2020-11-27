@@ -1,9 +1,9 @@
 public class Test {
     public static void main(String[] args) {
-   System.out.println(areEqual(4,2+2));
-   System.out.println(areEqual(5,2+3));
-   System.out.println(areEqual(8,5+3));
-   System.out.println(areEqual(7,8-1));
+    StringCalculator calculator= new StringCalculator();
+    int result= calculator.add("2");
+    System.out.println(areEqual(2,result));
+
     }
     private  static boolean areEqual(int expected, int actual){
         return actual==expected;
