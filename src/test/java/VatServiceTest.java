@@ -7,11 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VatServiceTest {
     @Test
-    void shouldCalculateGrossPriceForDeafultVat() {
+    void shouldCalculateGrossPriceForDefaultVat() {
         //given
         VatService vatService= new VatService();
         //when
-        vatService.getGrossPriceForDeafultVat(new Product(UUID.randomUUID(), new BigDecimal("20.00")));
+        Product product = new Product(UUID.randomUUID(), new BigDecimal("20.00"));
+        BigDecimal result = vatService.getGrossPriceForDeafultVat(product);
         //then
+        assertEquals(new BigDecimal("24.60"), result);
     }
 }
