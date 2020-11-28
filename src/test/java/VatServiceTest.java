@@ -16,4 +16,16 @@ class VatServiceTest {
         //then
         assertEquals(new BigDecimal("24.60"), result);
     }
+
+    @Test
+    void shouldCalculateGrossPriceForOtherVatValue() {
+        //given
+        VatService vatService= new VatService();
+        Product product= new Product(UUID.randomUUID(), new BigDecimal("10.00"));
+        //when
+        vatService.getGrossPrice(product.getNetPrice(),new BigDecimal("0.08"));
+
+
+        //then
+    }
 }
