@@ -3,13 +3,15 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VatServiceTest {
+    VatService vatService;
+
     @Test
     void shouldCalculateGrossPriceForDefaultVat() {
         //given
-        VatService vatService= new VatService();
+        vatService = new VatService();
         //when
         Product product = new Product(UUID.randomUUID(), new BigDecimal("20.00"));
         BigDecimal result = vatService.getGrossPriceForDeafultVat(product);
@@ -20,12 +22,12 @@ class VatServiceTest {
     @Test
     void shouldCalculateGrossPriceForOtherVatValue() {
         //given
-        VatService vatService= new VatService();
-        Product product= generateProductWithPrice("10.00");
+        vatService = new VatService();
+        Product product = generateProductWithPrice("10.00");
         //when
         BigDecimal grossPrice = vatService.getGrossPrice(product.getNetPrice(), new BigDecimal("0.08"));
         //then
-        assertEquals(new BigDecimal("10.80"),grossPrice);
+        assertEquals(new BigDecimal("10.80"), grossPrice);
     }
 
     private Product generateProductWithPrice(String vat) {
