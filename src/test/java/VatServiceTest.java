@@ -21,10 +21,14 @@ class VatServiceTest {
     void shouldCalculateGrossPriceForOtherVatValue() {
         //given
         VatService vatService= new VatService();
-        Product product= new Product(UUID.randomUUID(), new BigDecimal("10.00"));
+        Product product= generateProductWithPrice("10.00");
         //when
         BigDecimal grossPrice = vatService.getGrossPrice(product.getNetPrice(), new BigDecimal("0.08"));
         //then
         assertEquals(new BigDecimal("10.80"),grossPrice);
+    }
+
+    private Product generateProductWithPrice(String vat) {
+        return new Product(UUID.randomUUID(), new BigDecimal(vat));
     }
 }
