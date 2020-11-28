@@ -24,8 +24,7 @@ class VatServiceTest {
         Product product= new Product(UUID.randomUUID(), new BigDecimal("10.00"));
         //when
         BigDecimal grossPrice = vatService.getGrossPrice(product.getNetPrice(), new BigDecimal("0.08"));
-
-
         //then
+        assertEquals(new BigDecimal("10.80"),grossPrice);
     }
 }
