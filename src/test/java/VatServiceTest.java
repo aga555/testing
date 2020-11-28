@@ -23,7 +23,7 @@ class VatServiceTest {
         VatService vatService= new VatService();
         Product product= new Product(UUID.randomUUID(), new BigDecimal("10.00"));
         //when
-        vatService.getGrossPrice(product.getNetPrice(),new BigDecimal("0.08"));
+        BigDecimal grossPrice = vatService.getGrossPrice(product.getNetPrice(), new BigDecimal("0.08"));
 
 
         //then
