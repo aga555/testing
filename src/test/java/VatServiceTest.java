@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -19,7 +20,8 @@ class VatServiceTest {
         //when
         BigDecimal result = vatService.getGrossPriceForDeafultVat(product);
         //then
-        assertEquals(new BigDecimal("24.60"), result);
+        assertThat(result).isEqualTo(new BigDecimal("24.60"));
+
     }
 
     @Test
