@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class VatServiceTest {
     VatService vatService;
@@ -31,6 +32,16 @@ class VatServiceTest {
         assertEquals(new BigDecimal("10.80"), grossPrice);
     }
 
+    @Test
+    void shouldThrowExceptionWhenVatIsTooHigh()  {
+        //given
+        Product product = generateProductWithPrice("10.00");
+        //when
+        //then
+        assertThrows(Exception.class, ()->{
+                vatService.getGrossPrice(product.getNetPrice(), BigDecimal.TEN);
+        });
+    }
 
     private Product generateProductWithPrice(String vat) {
         return new Product(UUID.randomUUID(), new BigDecimal(vat));
