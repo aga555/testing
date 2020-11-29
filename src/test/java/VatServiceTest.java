@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ class VatServiceTest {
     VatService vatService;
 
     @Test
+    @DisplayName("should calculate gross price for default VAT")
     void shouldCalculateGrossPriceForDefaultVat() {
         //given
         Product product = generateProductWithPrice("20.00");
@@ -34,7 +36,7 @@ class VatServiceTest {
     }
 
     @BeforeEach
-    void setUp() {
+    void prepareVatService() {
         vatService = new VatService();
     }
 }
