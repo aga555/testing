@@ -17,7 +17,7 @@ class VatServiceTest {
         //given
         Product product = generateProductWithPrice("20.00");
         //when
-        BigDecimal result = vatService.getGrossPriceForDeafultVat(product);
+        BigDecimal result = vatService.getGrossPriceForDefaultVat(product);
         //then
         assertThat(result).isEqualTo(new BigDecimal("24.60"));
 
