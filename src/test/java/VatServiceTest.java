@@ -12,7 +12,7 @@ class VatServiceTest {
 
     @Test
     @DisplayName("should calculate gross price for default VAT")
-    void shouldCalculateGrossPriceForDefaultVat() {
+    void shouldCalculateGrossPriceForDefaultVat() throws Exception {
         //given
         Product product = generateProductWithPrice("20.00");
         //when
@@ -22,7 +22,7 @@ class VatServiceTest {
     }
 
     @Test
-    void shouldCalculateGrossPriceForOtherVatValue() {
+    void shouldCalculateGrossPriceForOtherVatValue() throws Exception {
         //given
         Product product = generateProductWithPrice("10.00");
         //when
@@ -30,6 +30,7 @@ class VatServiceTest {
         //then
         assertEquals(new BigDecimal("10.80"), grossPrice);
     }
+
 
     private Product generateProductWithPrice(String vat) {
         return new Product(UUID.randomUUID(), new BigDecimal(vat));
