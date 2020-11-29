@@ -30,17 +30,16 @@ class VatServiceTest {
         //when
         BigDecimal result = vatService.getGrossPrice(product.getNetPrice(), new BigDecimal("0.08"));
         //then
-        assertThat(result).isEqualTo( new BigDecimal("10.80"));
-        }
+        assertThat(result).isEqualTo(new BigDecimal("10.80"));
+    }
 
     @Test
-    void shouldThrowExceptionWhenVatIsTooHigh()  {
+    void shouldThrowExceptionWhenVatIsTooHigh() {
         //given
         Product product = generateProductWithPrice("10.00");
-        //when
         //then
-        assertThrows(Exception.class, ()->{
-                vatService.getGrossPrice(product.getNetPrice(), BigDecimal.TEN);
+        assertThrows(Exception.class, () -> {
+            vatService.getGrossPrice(product.getNetPrice(), BigDecimal.TEN);
         });
     }
 
