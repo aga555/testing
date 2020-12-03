@@ -10,13 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class VatServiceTest {
     VatService vatService;
+    VatProvider vatProvider;
 
     @Test
     @DisplayName("should calculate gross price for default VAT")
     void shouldCalculateGrossPriceForDefaultVat() throws IncorectVatException {
         //given
-        VatProvider vatProvider= Mockito.mock(VatProvider.class);
-        vatService = new VatService(vatProvider);
         Mockito.when(vatProvider.getDefaultVat()).thenReturn(new BigDecimal("0.23"));
         Product product = generateProduct("20.00", "clothes");
         //when
@@ -50,7 +49,8 @@ class VatServiceTest {
 
     @BeforeEach
     void prepareVatService() {
-
+        vatProvider= Mockito.mock(VatProvider.class);
+        vatService = new VatService(vatProvider);
     }
     private Product generateProduct(String vat, String type) {
     return new Product(UUID.randomUUID(), new BigDecimal(vat),type);
