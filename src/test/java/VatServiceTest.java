@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
+import static org.mockito.Mockito.when;
 
 class VatServiceTest {
     VatService vatService;
@@ -16,7 +18,7 @@ class VatServiceTest {
     @DisplayName("should calculate gross price for default VAT")
     void shouldCalculateGrossPriceForDefaultVat() throws IncorectVatException {
         //given
-        Mockito.when(vatProvider.getDefaultVat()).thenReturn(new BigDecimal("0.23"));
+        when(vatProvider.getDefaultVat()).thenReturn(new BigDecimal("0.23"));
         Product product = generateProduct("20.00", "clothes");
         //when
         BigDecimal result = vatService.getGrossPriceForDefaultVat(product);
@@ -29,25 +31,26 @@ class VatServiceTest {
     void shouldCalculateGrossPriceForOtherVatValue() throws IncorectVatException {
         //given
         String type = "fruit";
-        Product product = generateProduct("10.00",type);
-        Mockito.when(vatProvider.getVatForType(type)).thenReturn(new BigDecimal(0.08));
+        Product product = generateProduct("10.00", type);
+        when(vatProvider.getVatForType(type)).thenReturn(new BigDecimal(0.08));
         //when
         BigDecimal result = vatService.getGrossPrice(product.getNetPrice(), type);
         //then
         assertThat(result).isEqualTo(new BigDecimal("10.80"));
     }
 
-/*    @Test
+    @Test
     void shouldThrowExceptionWhenVatIsTooHigh() {
         //given
-        Product product = generateProduct("10.00", "car");
+        String type = "vegetable";
+        Product product = generateProduct("10.00", type);
+        when(vatProvider.getVatForType(type)).thenReturn(BigDecimal.TEN);
         //then
-        assertThrows(Exception.class, () -> {
-            vatService.getGrossPrice(product.getNetPrice(), BigDecimal.TEN, ),;
-        });
-    }*/
-
-
+        assertThatThrownBy(() -> {
+            vatService.getGrossPrice(product.getNetPrice(), type);
+        }).isInstanceOf(IncorectVatException.class)
+                .hasMessageContaining("Vat must be lower!");
+    }
 
     @BeforeEach
     void prepareVatService() {
