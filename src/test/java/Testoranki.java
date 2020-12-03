@@ -8,7 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class Testoranki {
     @Test
     void shouldReturnSumWhenTwoNumberGiven() {
-        int expected = 2 + 2;
+        //given
+        int first = 2;
+        int second = 2;
+        //when
+        int expected = first + second;
+        //then
         Assertions.assertEquals(4, expected);
     }
 
