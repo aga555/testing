@@ -25,34 +25,37 @@ class VatServiceTest {
 
     }
 
-   /* @Test
+    @Test
     void shouldCalculateGrossPriceForOtherVatValue() throws IncorectVatException {
         //given
-        Product product = generateProduct("10.00","fruit");
+        String type = "fruit";
+        Product product = generateProduct("10.00",type);
+        Mockito.when(vatProvider.getVatForType(type)).thenReturn(new BigDecimal(0.08));
         //when
-        BigDecimal result = vatService.getGrossPrice(product.getNetPrice(), new BigDecimal("0.08"));
+        BigDecimal result = vatService.getGrossPrice(product.getNetPrice(), type);
         //then
         assertThat(result).isEqualTo(new BigDecimal("10.80"));
     }
 
-    @Test
+/*    @Test
     void shouldThrowExceptionWhenVatIsTooHigh() {
         //given
-        Product product = generateProduct("10.00","car");
+        Product product = generateProduct("10.00", "car");
         //then
         assertThrows(Exception.class, () -> {
             vatService.getGrossPrice(product.getNetPrice(), BigDecimal.TEN, ),;
         });
-    }
-*/
+    }*/
+
 
 
     @BeforeEach
     void prepareVatService() {
-        vatProvider= Mockito.mock(VatProvider.class);
+        vatProvider = Mockito.mock(VatProvider.class);
         vatService = new VatService(vatProvider);
     }
+
     private Product generateProduct(String vat, String type) {
-    return new Product(UUID.randomUUID(), new BigDecimal(vat),type);
-}
+        return new Product(UUID.randomUUID(), new BigDecimal(vat), type);
+    }
 }
