@@ -1,10 +1,21 @@
 public class SimpleProduct {
     String id;
     double netPrice;
+    String type;
 
-    public SimpleProduct(String id, double netPrice) {
+    public SimpleProduct(String id, double netPrice,
+                         String type) {
         this.id = id;
         this.netPrice = netPrice;
+        this.type=type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getId() {

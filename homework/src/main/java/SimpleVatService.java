@@ -1,14 +1,15 @@
 public class SimpleVatService {
-    double vatValue;
+    VatProvider vatProvider;
 
-    public SimpleVatService(double vatValue) {
-        this.vatValue = 0.23;
+    public SimpleVatService(VatProvider vatProvider) {
+        this.vatProvider = vatProvider;
     }
 
     public double getGrossPriceForDefaultVat(SimpleProduct product) throws Exception {
 
-        return getGrossPrice(product.getNetPrice(), vatValue);
+        return getGrossPrice(product.getNetPrice(), vatProvider.getDefaultVat());
     }
+
 
     public double getGrossPrice(double netPrice, double vatValue) throws Exception {
 
