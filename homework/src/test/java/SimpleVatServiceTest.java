@@ -32,9 +32,7 @@ class SimpleVatServiceTest {
     void shouldThrowExceptionWhenVatIsTooHigh() throws Exception {
         double vatValue = 1.23;
         SimpleProduct simpleProduct = new SimpleProduct("1", 100.00);
-        assertThatThrownBy(() -> {
-            simpleVatService.getGrossPrice(simpleProduct.getNetPrice(), vatValue);
-        }).isInstanceOf(Exception.class)
+        assertThatThrownBy(() -> simpleVatService.getGrossPrice(simpleProduct.getNetPrice(), vatValue)).isInstanceOf(Exception.class)
                 .hasMessageContaining("Vat must be lower!");
     }
 
