@@ -44,4 +44,42 @@ class SimpleVatServiceTest {
         simpleVatService = new SimpleVatService(vatProvider);
     }
 
+    @Test
+    void getDefaultVat() {
+        //then
+        double result = simpleVatService.getDefaultVat();
+
+        assertThat(result).isEqualTo(0.23);
+    }
+
+    @Test
+    void shouldReturnSpecialVatRateForBooks() {
+        //given
+        SimpleProduct simpleProduct = new SimpleProduct("1", 10.00, "books");
+        //when
+        double result = simpleVatService.getVatForType(simpleProduct.getType());
+        //then
+        assertThat(result).isEqualTo(0.20);
+    }
+
+    @Test
+    void shouldReturnSpecialVatRateForPaper() {
+        //given
+        SimpleProduct simpleProduct = new SimpleProduct("1", 100.00, "paper");
+        //when
+        double result = simpleVatService.getVatForType(simpleProduct.getType());
+        //then
+        assertThat(result).isEqualTo(0.07);
+    }
+
+    @Test
+    void shouldReturnDefaultVatRateForOtherType() {
+        //given
+        SimpleProduct simpleProduct = new SimpleProduct("1", 100.00, "pencil");
+        //when
+        double result = simpleVatService.getVatForType(simpleProduct.getType());
+        //then
+        assertThat(result).isEqualTo(0.23);
+    }
 }
+
