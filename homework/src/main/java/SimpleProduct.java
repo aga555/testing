@@ -1,4 +1,3 @@
-
 public class SimpleProduct {
     String id;
     double netPrice;
