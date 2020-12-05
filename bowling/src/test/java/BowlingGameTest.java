@@ -6,8 +6,7 @@ class BowlingGameTest {
     BowlingGame theGame = new BowlingGame();
 
     @Test
-    void shouldScoreWhenRolledOneWithAssertJ() {
+    void shouldScoreWhenRolledOne() {
         assertThat(theGame.getScore()).isEqualTo(1);
-
     }
 }
